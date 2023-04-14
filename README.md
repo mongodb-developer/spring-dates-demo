@@ -5,5 +5,5 @@ When the application is run, it connects to the specified MongoDB instance and
 creates three 'customer' documents in the 'customers' collection, each of which
 includes an _id, a name and a date-of-birth field.
 
-The application then shows expamples of how to search for a specific ID, a 
-specific DOB, and a specific birth month.
+The application then shows expamples of how to search for a customer by specific ID, 
+a specific DOB, or a specific birth month.
