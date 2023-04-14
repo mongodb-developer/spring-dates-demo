@@ -49,17 +49,27 @@ public class DesignreviewsApplication implements CommandLineRunner {
 		// find customers with a specific birth month
 		System.out.println("Customers found with findByBirthMonth():");
 		System.out.println("-------------------------------");
-		customerResponse = customerRepo.findCustomerByBirthMonth(3);
-		System.out.println(customerResponse.get());
-		
+		for (Customer customer : customerRepo.findCustomerByBirthMonth(3)) {
+			System.out.println(customer);
+		}
+
+		System.out.println();
+
+		// find customers with a birth year more recent than a given value
+		System.out.println("Customers found with findCustomerYoungerThanBirthYear():");
+		System.out.println("-------------------------------");
+		for (Customer customer : customerRepo.findCustomerYoungerThanBirthYear(1971)) {
+			System.out.println(customer);
+		}
 
 		System.out.println();
 
 		// find customers with a specific DOB
 		System.out.println("Customers found with findByDOB():");
 		System.out.println("-------------------------------");
-		customerResponse = customerRepo.findCustomerByDOB(new Date(70, 6 , 14));
-		System.out.println(customerResponse.get());
+		for (Customer customer : customerRepo.findCustomerByDOB(new Date(70, 6 , 14))) {
+			System.out.println(customer);
+		}
 		
 
 	}
