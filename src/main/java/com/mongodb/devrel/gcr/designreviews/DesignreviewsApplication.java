@@ -24,9 +24,9 @@ public class DesignreviewsApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 
 		// save an airline
-		customerRepo.save(new Customer("GCR2103", "Graeme Robinson", new Date(74, 2, 21)));
+		customerRepo.save(new Customer("GCR2103", "Graeme Robinson", new Date(74, 0, 1)));
 		customerRepo.save(new Customer("NG9876", "Norman Graham", new Date(70,6,14)));
-		customerRepo.save(new Customer("AM1234", "Andrew Morgan", new Date(82,9,20)));
+		customerRepo.save(new Customer("AM1234", "Andrew Morgan", new Date(74,9,20)));
 
 
 		// fetch all customers
@@ -49,28 +49,34 @@ public class DesignreviewsApplication implements CommandLineRunner {
 		// find customers with a specific birth month
 		System.out.println("Customers found with findByBirthMonth():");
 		System.out.println("-------------------------------");
-		for (Customer customer : customerRepo.findCustomerByBirthMonth(3)) {
+		for (Customer customer : customerRepo.findCustomerByBirthDate(new Date(70, 6, 14))) {
 			System.out.println(customer);
 		}
 
 		System.out.println();
 
-		// find customers with a birth year more recent than a given value
-		System.out.println("Customers found with findCustomerYoungerThanBirthYear():");
+		// find customers with a specific birth year taking timezone into account
+		System.out.println("Customers found with findCustomerByBirthYearTZ():");
 		System.out.println("-------------------------------");
-		for (Customer customer : customerRepo.findCustomerYoungerThanBirthYear(1971)) {
+		System.out.println("Timezone Denver");
+		//change this to your own local timezone
+		for (Customer customer : customerRepo.findCustomerByBirthYearTZ(1974, "America/Denver")) {
+			System.out.println(customer);
+		}
+		System.out.println("Timezone Los Angeles");
+		//Change this to a timezone behind your local zone - you should see a differing result set.
+		for (Customer customer : customerRepo.findCustomerByBirthYearTZ(1974, "America/Los_Angeles")) {
 			System.out.println(customer);
 		}
 
 		System.out.println();
 
-		// find customers with a specific DOB
-		System.out.println("Customers found with findByDOB():");
+		// find customers with a specific birth year, ignoring timezone
+		System.out.println("Customers found with findCustomerByBirthYear():");
 		System.out.println("-------------------------------");
-		for (Customer customer : customerRepo.findCustomerByDOB(new Date(70, 6 , 14))) {
+		for (Customer customer : customerRepo.findCustomerByBirthYear(1974)) {
 			System.out.println(customer);
 		}
-		
 
 	}
 }
